@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
-
-import Dragger from "antd/es/upload/Dragger";
-import Divider from "antd/es/divider";
-import Title from "antd/es/skeleton/Title";
-import Popover from "antd/es/popover";
 import Button from "antd/es/button";
-import QuestionOutlined from "@ant-design/icons/lib/icons/QuestionOutlined";
-import TextArea from "antd/es/input/TextArea";
 import {
     Form,
     Select,
     InputNumber,
     Switch,
-    Radio,
-    Slider,
     Upload,
     Rate,
     Checkbox,
     message,
-    Row,
-    Col,
 } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import { InboxOutlined } from '@ant-design/icons';
 
 const props = {
     name: 'file',
@@ -78,52 +67,63 @@ class UploadPage extends React.Component {
                     onFinish={onFinish}
                     initialValues={{
                         ['input-number']: 3,
-                        ['checkbox-group']: ['A', 'B'],
-                        rate: 3.5,
                     }}
                 >
                     <Form.Item label="Project">
                         <span className="ant-form-title">Keratitis Image Recognition via DL system</span>
                     </Form.Item>
+
                     <Form.Item
-                        name="select"
+                        name="type"
                         label="Select Type"
                         hasFeedback
                         rules={[{ required: true, message: 'Please select your image type!' }]}
                     >
                         <Select placeholder="Please select the type of your image">
-                            <Option value="prof">Professional Cornell Photograph</Option>
-                            <Option value="self">Self made photograph</Option>
+                            <Option value="prof">Professional Photograph</Option>
+                            <Option value="self">Self-made Photograph</Option>
                             <Option value="notsay">Prefer not to say</Option>
                         </Select>
                     </Form.Item>
 
-                    <Form.Item label="InputNumber">
-                        <Form.Item name="input-number" noStyle>
-                            <InputNumber min={1} max={10} />
-                        </Form.Item>
-                        <span className="ant-form-text"> machines</span>
+                    <Form.Item
+                        name="quality"
+                        label="Select Quality"
+                        hasFeedback
+                    >
+                        <Select placeholder="Please select the quality of your image">
+                            <Option value="high">High</Option>
+                            <Option value="medium">Medium</Option>
+                            <Option value="low">Low</Option>
+                        </Select>
+                    </Form.Item>
+                    {/*<Form.Item label="InputNumber">*/}
+                    {/*    <Form.Item name="input-number" noStyle>*/}
+                    {/*        <InputNumber min={1} max={10} />*/}
+                    {/*    </Form.Item>*/}
+                    {/*    <span className="ant-form-text"> machines</span>*/}
+                    {/*</Form.Item>*/}
+
+                    <Form.Item name="switch" label="Share data with us?" valuePropName="checked">
+                        <Checkbox />
                     </Form.Item>
 
-                    <Form.Item name="switch" label="Share data with us to improve our system?" valuePropName="checked">
-                        <Switch />
-                    </Form.Item>
 
-                    <Form.Item name="rate" label="Rate">
-                        <Rate />
-                    </Form.Item>
 
-                    <Form.Item label="Dragger"
-                               >
+                    <Form.Item label="Upload your image">
                         <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle >
-                            <Upload.Dragger name="files" action="/upload.do">
+                            <Upload.Dragger name="files" action="/upload.do" accept=".bmp,.png,.jpeg,.jpg,.gif,.webp" multiple={false}>
                                 <p className="ant-upload-drag-icon">
                                     <InboxOutlined />
                                 </p>
                                 <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+                                <p className="ant-upload-hint">Support for a single image file(.bmp,.png,.jpeg,.jpg,.gif,.webp)</p>
                             </Upload.Dragger>
                         </Form.Item>
+                    </Form.Item>
+
+                    <Form.Item name="rate" label="Rate">
+                        <Rate />
                     </Form.Item>
 
                     <Form.Item
