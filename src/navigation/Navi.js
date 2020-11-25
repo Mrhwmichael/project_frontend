@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import logo from '../logo.jpg';
 import './Navi.css'
-import Icon from "@ant-design/icons";
+import UploadPage from "../upload/Upload";
 const { Header, Content, Footer, Sider } = Layout;
 
 class Navigation extends Component {
@@ -17,6 +17,7 @@ class Navigation extends Component {
             collapsed: !this.state.collapsed,
         });
     }
+
     render() {
         return (
             <Layout>
@@ -28,15 +29,13 @@ class Navigation extends Component {
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1">
-                            <Icon type="user" />
                             <span className="nav-text">Diagnosis</span>
+
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Icon type="video-camera" />
-                            <span className="nav-text">nav 2</span>
+                            <span className="nav-text">Model mechanism</span>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Icon type="upload" />
                             <span className="nav-text">contact us</span>
                         </Menu.Item>
                     </Menu>
@@ -54,11 +53,13 @@ class Navigation extends Component {
                     <Content style={{ margin: '0 16px' }}>
 
                         <div style={{ padding: 24, background: '#fff', minHeight: 780 }}>
+                            <UploadPage></UploadPage>
 
                         </div>
+
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
-                        Ant Design ©2016 Created by Ant UED
+                        Created by <a href={"https://mrhwmichael.github.io/"}>Haoyu Wang</a> in BUPT.
                     </Footer>
                 </Layout>
             </Layout>
