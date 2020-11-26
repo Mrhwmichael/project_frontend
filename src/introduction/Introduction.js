@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import logo from '../logo.jpg';
 import './Introduction.css'
-import Diagnosis from "../diagnosis/Diagnosis";
 
 const { Header, Content, Footer, Sider } = Layout;
 

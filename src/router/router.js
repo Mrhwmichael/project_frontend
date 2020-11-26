@@ -1,12 +1,10 @@
 import React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 
-
 import Introduction from "../introduction/Introduction";
 import Diagnosis from "../diagnosis/Diagnosis";
 import About from "../about/About";
 import Home from "../home/Home";
-
 
 const BasicRoute = () => (
     <HashRouter>
