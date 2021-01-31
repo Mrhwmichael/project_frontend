@@ -4,34 +4,12 @@ import Button from "antd/es/button";
 import {
     Form,
     Select,
-    InputNumber,
-    Switch,
-    Upload,
     Rate,
     Checkbox,
     message,
 } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-
-const props = {
-    name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
-        const { status } = info.file;
-        if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-    onCheckBoxChange(e) {
-    console.log(`checked = ${e.target.checked}`);
-    },
-};
+import Dragger from "antd/es/upload/Dragger";
 
 const content = (
     <div>
@@ -39,6 +17,7 @@ const content = (
         <p>We're following a series of privacy policies and ensures your data security.</p>
     </div>
 );
+
 const { Option } = Select;
 
 const formItemLayout = {
@@ -46,25 +25,46 @@ const formItemLayout = {
     wrapperCol: { span: 14 },
 };
 
-const normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-        return e;
-    }
-    return e && e.fileList;
-};
-
-const onFinish = values => {
-    console.log('Received values of form: ', values);
-};
 
 class UploadPage extends React.Component {
+    state = {
+        imageURL: "",
+    };
+    handleChange = info => {
+        const { status } = info.file;
+        if (status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully.`);
+            this.state.imageURL = info.file.response.path;
+
+        } else if (status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    };
+
+    handleSubmit = () => {
+        fetch('http://localhost:5000/predict',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json;charset=UTF-8'
+            },
+            cache:'default',
+            body: this.state.imageURL,
+        }).then(res =>res.json())
+        .then((data) => {
+            console.log(data)
+
+        })
+    };
+
     render() {
         return (
                 <Form
                     name="validate_other"
                     {...formItemLayout}
-                    onFinish={onFinish}
+                    onFinish={this.handleSubmit}
                     initialValues={{
                         ['input-number']: 3,
                     }}
@@ -111,15 +111,14 @@ class UploadPage extends React.Component {
 
 
                     <Form.Item label="Upload your image">
-                        <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle >
-                            <Upload.Dragger name="files" action="/upload.do" accept=".bmp,.png,.jpeg,.jpg,.gif,.webp" multiple={false}>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                <p className="ant-upload-hint">Support for a single image file(.bmp,.png,.jpeg,.jpg,.gif,.webp)</p>
-                            </Upload.Dragger>
-                        </Form.Item>
+
+                        <Dragger  action='http://localhost:5000/upload' accept=".bmp,.png,.jpeg,.jpg,.gif,.webp" onChange={this.handleChange}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                            <p className="ant-upload-hint">Support for a single image file(.bmp,.png,.jpeg,.jpg,.gif,.webp)</p>
+                        </Dragger>
                     </Form.Item>
 
                     <Form.Item name="rate" label="Rate">
@@ -143,7 +142,7 @@ class UploadPage extends React.Component {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" >
                             Submit
                         </Button>
                     </Form.Item>

@@ -5,6 +5,7 @@ import Introduction from "../introduction/Introduction";
 import Diagnosis from "../diagnosis/Diagnosis";
 import About from "../about/About";
 import Home from "../home/Home";
+import Result from "../result/result";
 
 const BasicRoute = () => (
     <HashRouter>
@@ -13,6 +14,8 @@ const BasicRoute = () => (
             <Route exact path="/intro" component={Introduction}/>
             <Route exact path="/nav" component={Diagnosis}/>
             <Route exact path="/about" component={About}/>
+            <Route exact path="/result" component={Result}/>
+
         </Switch>
     </HashRouter>
 

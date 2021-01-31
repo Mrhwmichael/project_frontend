@@ -30,7 +30,7 @@ class Home extends Component {
                     <Menu theme="dark" mode="inline">
                         <Menu.Item key="1"><a href={"#/nav"}>Diagnosis</a></Menu.Item>
                         <Menu.Item key="2"><a href={"#/intro"}>Model introduction</a></Menu.Item>
-                        <Menu.Item key="3"><a href={"#/about"}>About us</a></Menu.Item>
+                        <Menu.Item key="3"><a href={"#/about"}>About me</a></Menu.Item>
                     </Menu>
                 </Sider>
 

@@ -14,7 +14,7 @@ class AboutText extends React.Component {
     render() {
         return (
             <Typography class={"topography"}>
-                <Title>Introduction to our project</Title>
+                <Title>Introduction to my project</Title>
                 <Title level={2}>Background</Title>
                 <Paragraph>
                     Keratitis is one of the common ophthalmic diseases, and one of the main blinding eye diseases. The
@@ -130,7 +130,7 @@ class About extends Component {
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['3']}>
                         <Menu.Item key="1"><a href={"#/nav"}>Diagnosis</a></Menu.Item>
                         <Menu.Item key="2"><a href={"#/intro"}>Model introduction</a></Menu.Item>
-                        <Menu.Item key="3"><a href={"#/about"}>About us</a></Menu.Item>
+                        <Menu.Item key="3"><a href={"#/about"}>About me</a></Menu.Item>
                     </Menu>
                 </Sider>
 
